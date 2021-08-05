@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:10-alpine
+    ports:
+      - "5432:5432"
+    environment: 
+      POSTGRES_USER: dummy
+      POSTGRES_PASSWORD: dummy
+      POSTGRES_DB: services
+      TZ: UTC
+      PGTZ: UTC
+  test:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - "postgres"
