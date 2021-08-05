@@ -1,7 +1,7 @@
 {
     "name": "test",
     "version": "1.0.0",
-    "license": "ISC",
+    "license": "MIT",
     "private": true,
     "scripts": {
         "build": "rm -rf dist/ && tsc && cp -R src/resource dist/",
