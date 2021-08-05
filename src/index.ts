@@ -1,7 +1,7 @@
 import 'express-validator';
 import 'reflect-metadata';
 import { initialiseDb } from './component/db';
-import { createHttpServer } from './route';
+import { createHttpServer } from './component/server';
 
 initialiseDb().then(() => {
     createHttpServer();

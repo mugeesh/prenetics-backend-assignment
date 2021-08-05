@@ -8,7 +8,7 @@
     "entities": [
         "dist/entity/*.js"
     ],
-    "schema": "skeleton",
+    "schema": "test",
     "cli": {
         "migrationsDir": "src/migration"
     }
