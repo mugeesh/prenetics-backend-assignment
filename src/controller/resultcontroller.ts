@@ -1,14 +1,42 @@
 import { Request, Response } from 'express';
 import { getManager, getRepository } from 'typeorm';
 import { logger } from '../component/logger';
+import { search } from '../component/search';
+import { Organisation } from '../entity/organisation';
 import { Profile } from '../entity/profile';
 import { Result } from '../entity/result';
 
 export const resultController = new class {
 
     getResults = async (request: Request, response: Response) => {
-        response.status(501).json({ msg: 'To be implemented' });
-        return;
+        request.checkParams('org', 'org is not valid').isUUID();
+        const errors = request.validationErrors();
+        if (errors) {
+            response.status(400).json(errors);
+            return;
+        }
+        const { org, } = request.params;
+        try {
+            const manager = getManager();
+            const organisation = await manager.findOne(Organisation, {
+                where: {
+                    organisationId: org,
+                }
+            });
+            if (!organisation) {
+                response.status(404).json({ msg: 'Organisation not found' });
+            } else {
+                const result = await search(
+                    manager,
+                    organisation,
+                    request.params,
+                );
+                response.status(200).json(result);
+            }
+        } catch (err) {
+            logger.error(err.message);
+            response.status(500).json({ msg: 'Something went wrong' });
+        }
     }
 
     getProfileResult = async (request: Request, response: Response) => {

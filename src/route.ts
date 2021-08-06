@@ -28,7 +28,7 @@ export const routes = [
     },
     {
         method: 'get',
-        route: `${versionPath}/org/:org/sample/`,
+        route: `${versionPath}/org/:org/sample`,
         main: resultController.getResults,
     },
     {
