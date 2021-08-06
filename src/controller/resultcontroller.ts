@@ -7,8 +7,7 @@ import { Result } from '../entity/result';
 export const resultController = new class {
 
     getResults = async (request: Request, response: Response) => {
-        // TODO
-        response.status(404).json({ msg: 'Unsupported' });
+        response.status(501).json({ msg: 'To be implemented' });
         return;
     }
 

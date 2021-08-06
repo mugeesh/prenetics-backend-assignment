@@ -227,6 +227,9 @@
                 }
               }
             }
+          },
+          "501": {
+            "description": "to be implemented"
           }
         }
       }

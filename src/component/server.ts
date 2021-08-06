@@ -10,16 +10,24 @@ export function createHttpServer() {
     app.use(express.urlencoded({ limit: 100000, extended: false }));
     app.use(express.json({ limit: 100000 }));
     app.use(expressValidator());
+    // request validation middleware
+    app.use(((req, res, next) => {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Headers', `Origin,Accept,Content-Type,X-Owner,X-Requested-With,X-XSRF-Token,X-Access-Token,Authorization,Cache-Control,Expires`);
+        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+        res.header('Access-Control-Max-Age', '3600');
+        res.header('Access-Control-Allow-Credentials', 'true');
+        console.log(1);
+        next();
+    }));
     routes.forEach(r => {
         const { method, route, main, } = r;
         logger.info(`Adding ${method} ${route}`);
         const handler = async (req: express.Request, res: express.Response, _next: express.NextFunction) => {
             try {
-                res.header('Access-Control-Allow-Origin', '*');
                 const result = main(req, res);
                 if (result instanceof Promise) {
-                    const response = await result;
-                    res.send(response);
+                    await result;
                 } else {
                     res.json(result);
                 }

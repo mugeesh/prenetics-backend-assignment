@@ -4,7 +4,8 @@ import { SWAGGER } from '../component/constant';
 export const swaggerController = new class {
 
     getSwagger = async (request: Request, response: Response) => {
-        return SWAGGER;
+        response.status(200).json(SWAGGER);
+        return;
     }
 
 };
