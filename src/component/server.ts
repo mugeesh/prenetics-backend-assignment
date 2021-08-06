@@ -15,6 +15,7 @@ export function createHttpServer() {
         logger.info(`Adding ${method} ${route}`);
         const handler = async (req: express.Request, res: express.Response, _next: express.NextFunction) => {
             try {
+                res.header('Access-Control-Allow-Origin', '*');
                 const result = main(req, res);
                 if (result instanceof Promise) {
                     const response = await result;
