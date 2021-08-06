@@ -6,9 +6,15 @@ import { Result } from '../entity/result';
 
 export const resultController = new class {
 
+    getResults = async (request: Request, response: Response) => {
+        // TODO
+        response.status(404).json({ msg: 'Unsupported' });
+        return;
+    }
+
     getProfileResult = async (request: Request, response: Response) => {
-        request.checkParams('org', 'testId is not valid').isUUID();
-        request.checkParams('profileId', 'testId is not valid').isUUID();
+        request.checkParams('org', 'org is not valid').isUUID();
+        request.checkParams('profileId', 'profileId is not valid').isUUID();
         request.checkParams('sampleId', 'sampleId is not valid').isString().notEmpty();
         const errors = request.validationErrors();
         if (errors) {
@@ -50,7 +56,7 @@ export const resultController = new class {
                 response.status(200).json({
                     data: {
                         id,
-                        type: 'result',
+                        type: 'sample',
                         attributes: {
                             result,
                             sampleId,
@@ -70,9 +76,9 @@ export const resultController = new class {
     }
 
     addResult = async (request: Request, response: Response) => {
-        request.checkParams('org', 'testId is not valid').isUUID();
-        request.checkParams('profileId', 'testId is not valid').isUUID();
-        request.checkBody('data.type', 'type is not valid').equals('result');
+        request.checkParams('org', 'org is not valid').isUUID();
+        request.checkParams('profileId', 'profileId is not valid').isUUID();
+        request.checkBody('data.type', 'type is not valid').equals('sample');
         request.checkBody('data.attributes.sampleId', 'sampleId is not valid').notEmpty();
         request.checkBody('data.attributes.resultType', 'resultType is not valid').notEmpty();
         const errors = request.validationErrors();
@@ -117,7 +123,7 @@ export const resultController = new class {
             response.status(201).json({
                 data: {
                     id,
-                    type: 'result',
+                    type: 'sample',
                     attributes: {
                         sampleId,
                         resultType,

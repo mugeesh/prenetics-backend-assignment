@@ -7,8 +7,8 @@ import { Profile } from '../entity/profile';
 export const profileController = new class {
 
     getProfile = async (request: Request, response: Response) => {
-        request.checkParams('org', 'testId is not valid').isUUID();
-        request.checkParams('profileId', 'testId is not valid').isUUID();
+        request.checkParams('org', 'org is not valid').isUUID();
+        request.checkParams('profileId', 'profileId is not valid').isUUID();
         const errors = request.validationErrors();
         if (errors) {
             response.status(400).json(errors);
@@ -57,7 +57,7 @@ export const profileController = new class {
     }
 
     createProfile = async (request: Request, response: Response) => {
-        request.checkParams('org', 'testId is not valid').isUUID();
+        request.checkParams('org', 'org is not valid').isUUID();
         request.checkBody('data.type', 'type is not valid').equals('profile');
         request.checkBody('data.attributes.name', 'name is not valid').notEmpty();
         const errors = request.validationErrors();

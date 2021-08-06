@@ -21,7 +21,7 @@ export class Result {
     @UpdateDateColumn({ name: 'resultTime', type: 'timestamp without time zone' })
     resultTime: Date;
 
-    @Column('jsonb', { name: 'result', nullable: true })
+    @Column('text', { name: 'result', nullable: true })
     result: string;
 
     @ManyToOne(type => Profile, profile => profile.result)
