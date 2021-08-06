@@ -59,6 +59,7 @@ curl --location --request GET 'http://localhost:8080/test/v1.0/org/84298aa5-27a9
 * Docker (https://docs.docker.com/get-docker/)
 * Docker Compose (https://docs.docker.com/compose/install/)
 ## Instructions
-* `docker-compose up -d --build` -- Build and set up postgres and service
+* `docker-compose up -d --build` -- Build and set up swagger, postgres and service
 * `docker-compose down --rmi all` -- Shutdown and clean up
+* Go to `http://localhost:9080/swagger/` to interact with APIs
 
