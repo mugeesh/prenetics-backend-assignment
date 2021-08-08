@@ -1,7 +1,10 @@
 # Test Service
 
-A micro service that manages organisations' test results. We have abstracted other aspects such as authentication. 
+A micro service that manages organisations' test results. We have abstracted other aspects such as authentication.
 
+![Entity Relationships](test.svg "Entity Relationships")
+
+Above shows the entity relationship between an organisation (`organisation`), its users (`profile`) and their test results (`sample`)
 # Local Development
 ## Prerequisites
 * node v10
