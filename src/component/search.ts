@@ -24,6 +24,14 @@ export async function search(
                     activateTime: '2021-07-12 15:00:00',
                     resultTime: '2021-07-12 16:00:00',
                 },
+                relationships: {
+                    profile: {
+                        data: {
+                            type: 'profile',
+                            id: 'b66df241-e780-4c9c-aeb1-0efc4946face',
+                        },
+                    },
+                },
             },
             {
                 id: '98627793-ee13-4eaf-a304-9e628d110f3c',
@@ -34,6 +42,14 @@ export async function search(
                     resultType: ResultType.rtpcr,
                     activateTime: '2021-07-12 19:00:00',
                     resultTime: '2021-07-12 20:00:00',
+                },
+                relationships: {
+                    profile: {
+                        data: {
+                            type: 'profile',
+                            id: '0bf3bd3b-75bc-4540-ba04-a19ab5e9382c',
+                        },
+                    },
                 },
             },
             {
@@ -46,6 +62,14 @@ export async function search(
                     activateTime: '2021-07-13 15:00:00',
                     resultTime: '2021-07-13 16:00:00',
                 },
+                relationships: {
+                    profile: {
+                        data: {
+                            type: 'profile',
+                            id: 'b50d027e-d8c5-496b-8665-dd2281ab1b32',
+                        },
+                    },
+                },
             },
             {
                 id: '8423dfd3-37b5-4c62-a37c-729e410d19e5',
@@ -57,6 +81,14 @@ export async function search(
                     activateTime: '2021-07-14 15:00:00',
                     resultTime: '2021-07-14 16:00:00',
                 },
+                relationships: {
+                    profile: {
+                        data: {
+                            type: 'profile',
+                            id: '97932431-d7de-48ec-9f51-d0d78170ffe9',
+                        },
+                    },
+                },
             },
             {
                 id: '567a8b28-c1ab-467d-85ff-04fbcb24cb9a',
@@ -67,6 +99,51 @@ export async function search(
                     resultType: ResultType.antigen,
                     activateTime: '2021-07-15 15:00:00',
                     resultTime: '2021-07-15 16:00:00',
+                },
+                relationships: {
+                    profile: {
+                        data: {
+                            type: 'profile',
+                            id: '47d67686-b77f-47e8-92e4-76f1b5f1bc92',
+                        },
+                    },
+                },
+            },
+        ],
+        included: [
+            {
+                type: 'profile',
+                id: 'b66df241-e780-4c9c-aeb1-0efc4946face',
+                attributes: {
+                    name: 'Peter Chan',
+                },
+            },
+            {
+                type: 'profile',
+                id: '47d67686-b77f-47e8-92e4-76f1b5f1bc92',
+                attributes: {
+                    name: 'Michael Caine',
+                },
+            },
+            {
+                type: 'profile',
+                id: '97932431-d7de-48ec-9f51-d0d78170ffe9',
+                attributes: {
+                    name: 'Bruce Lee',
+                },
+            },
+            {
+                type: 'profile',
+                id: 'b50d027e-d8c5-496b-8665-dd2281ab1b32',
+                attributes: {
+                    name: 'John Locke',
+                },
+            },
+            {
+                type: 'profile',
+                id: '0bf3bd3b-75bc-4540-ba04-a19ab5e9382c',
+                attributes: {
+                    name: 'Andrea Lau',
                 },
             },
         ],
