@@ -431,6 +431,39 @@
           }
         }
       },
+      "SearchSample": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Sample"
+          },
+          "relationships": {
+            "type": "object",
+            "properties": {
+              "profile": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "profile"
+                        ]
+                      },
+                      "id": {
+                        "type": "string",
+                        "format": "uuid"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "ManySamples": {
         "type": "object",
         "properties": {
@@ -446,7 +479,13 @@
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Sample"
+              "$ref": "#/components/schemas/SearchSample"
+            }
+          },
+          "included": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Profile"
             }
           }
         }
