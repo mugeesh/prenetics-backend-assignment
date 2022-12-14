@@ -24,9 +24,6 @@ RUN mv /home/node/app/package.json /var/www/html/api/ &&\
     mv /home/node/app/package-lock.json /var/www/html/api/ &&\
     npm ci --only=production
 
-# Audit production dependencies
-# RUN npm audit --production
-
 # Deployment
 FROM node:10-alpine3.11
 
