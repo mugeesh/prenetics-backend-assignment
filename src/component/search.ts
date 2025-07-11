@@ -16,6 +16,7 @@ export async function search(
         patientName = '',
         resultTime = '',
         patientId = '',
+        resultValue = '',
     } = query;
 
     const querybuilder = manager.createQueryBuilder()
@@ -44,6 +45,10 @@ export async function search(
     if (patientId) {
         querybuilder.andWhere('profile.profileId = :patientId', {patientId: patientId});
     }
+    if (resultValue) {
+        querybuilder.andWhere('result.type = :type', {type: resultValue});
+    }
+
 
     const result = await querybuilder.getManyAndCount();
 

@@ -1,5 +1,5 @@
 const { Pool } = require('pg');
-
+// Only for testing, if someone wanted to test DB connection locally can use this Node db-test.js
 const config = {
     db: {
         url: "postgresql://dummy:dummy@localhost:5432/services",

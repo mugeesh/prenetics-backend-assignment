@@ -10,7 +10,6 @@ services:
     depends_on:
       - test
 
-
   postgres:
     image: postgres:10-alpine
     ports:

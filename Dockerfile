@@ -15,6 +15,8 @@ COPY src /home/node/app/src
 COPY test /home/node/app/test
 
 # Test and build
+## ignore this test case, this has a integration test which require DB, can check this
+## duing production deployment pipeline like bitbucket, github ,jenkis or any CI/CD pipeline
 RUN npm run test -- --ignore "test/search.test.ts"
 RUN npm run build
 

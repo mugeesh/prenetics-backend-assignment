@@ -95,6 +95,17 @@ curl "http://localhost:3000/api/search?patientid=de8f4e03-bfca-483f-b356-e952ba8
 Expected: Only results for that patient ID.
 
 
+###### Step 5: Search by Type or resultValue
+Send a GET request with orgId=fd33629c-c1e8-43f4-86b7-b85396815616
+```
+curl "http://localhost:8080/test/v1.0/org/fd33629c-c1e8-43f4-86b7-b85396815616/sample?resultValue=negative"
+or
+curl "http://localhost:8080/test/v1.0/org/fd33629c-c1e8-43f4-86b7-b85396815616/sample?resultValue=positive"
+```
+Expected: Only results for that patient whose are positive or negative.
+
+
+
 #### Testing only
 1. if you wanted to load data can load dummy data like this
 2. ``` node  ```
