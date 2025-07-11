@@ -3,6 +3,7 @@ import { orgController } from './controller/orgcontroller';
 import { profileController } from './controller/profilecontroller';
 import { resultController } from './controller/resultcontroller';
 import { swaggerController } from './controller/swaggercontroller';
+import { healthController } from './controller/healthcontroller';
 
 const versionPath = `/${APPLICATION_NAME}/v1.0`;
 export const routes = [
@@ -40,5 +41,10 @@ export const routes = [
         method: 'post',
         route: `${versionPath}/org/:org/profile/:profileId/sample`,
         main: resultController.addResult,
+    },
+    {
+        method: 'get',
+        route: `${versionPath}/health`,
+        main: healthController.healthCheck,
     },
 ];

@@ -2,32 +2,12 @@ import * as express from 'express';
 import * as expressValidator from 'express-validator';
 import * as http from 'http';
 import { routes } from '../route';
-import { APPLICATION_NAME, PORT } from './constant';
 import { logger } from './logger';
-import * as cors from 'cors';
 
-// In your server setup file
-function getCorsOptions() {
-    return {
-        origin: [
-            'http://localhost:9080',  // Swagger UI on host
-            'http://test:9080',      // Swagger UI in Docker network
-            /^http:\/\/localhost(:\d+)?$/,  // Any localhost port
-            /^http:\/\/test(:\d+)?$/       // Any test port
-        ],
-        credentials: true,
-        allowedHeaders: ['*'],
-        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
-    };
-}
-
-export function createExpressApp() {
+export function createHttpServer() {
     const app = express();
-
-    // Enhanced CORS configuration
-    app.use(cors(getCorsOptions()));
-    app.use(express.urlencoded({limit: 100000, extended: false}));
-    app.use(express.json({limit: 100000}));
+    app.use(express.urlencoded({ limit: 100000, extended: false }));
+    app.use(express.json({ limit: 100000 }));
     app.use(expressValidator());
     // request validation middleware
     app.use(((req, res, next) => {
@@ -36,11 +16,10 @@ export function createExpressApp() {
         res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
         res.header('Access-Control-Max-Age', '3600');
         res.header('Access-Control-Allow-Credentials', 'true');
-        console.log(1);
         next();
     }));
     routes.forEach(r => {
-        const {method, route, main } = r;
+        const { method, route, main, } = r;
         logger.info(`Adding ${method} ${route}`);
         const handler = async (req: express.Request, res: express.Response, _next: express.NextFunction) => {
             try {
@@ -54,10 +33,10 @@ export function createExpressApp() {
                 logger.error(err);
                 if (err.statusCode === 400) {
                     res.status(400);
-                    res.json({code: 400, msg: err.message });
+                    res.json({ code: 400, msg: err.message, });
                 } else {
                     res.status(500);
-                    res.json({code: 500, msg: err.message });
+                    res.json({ code: 500, msg: err.message, });
                 }
             }
         };
@@ -78,14 +57,7 @@ export function createExpressApp() {
                 app.get(route, handler);
                 break;
         }
-
     });
-    return app;
-}
-export function createHttpServer() {
-    const app = createExpressApp();
     const server = http.createServer(app);
-    server.listen(PORT);
-    logger.info(`${APPLICATION_NAME} is running on http://localhost:${PORT}`);
+    return server;
 }
-

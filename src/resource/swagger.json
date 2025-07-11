@@ -179,6 +179,15 @@
           },
           {
             "in": "query",
+            "name": "patientId",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "in": "query",
             "name": "patientName",
             "required": false,
             "schema": {

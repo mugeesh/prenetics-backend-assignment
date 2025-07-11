@@ -10,13 +10,15 @@ Above shows the entity relationship between an organisation (`organisation`), it
 * node v10
 * npm
 ## Instructions
-* `npm ci` -- Install dependencies
-* `npm run watch` -- Watch 
-* `npm run build` -- Build
-* `npm run test` -- Test
-* `npm audit` -- Audit
-* `npm run dev` -- Run locally as node process, note that a local postgres instance must be set up and its hostname must be updated at `src/resource/api.json` (`docker-compose up -d --build postgres` brings up only the empty postgres container)
-
+1. run this command
+``` 
+docker compose down -v && docker compose up -d --build 
+```
+2. Go to `http://localhost:9080/swagger/` to interact with APIs
+3. if you wanted to dummy data can use this script
+```
+node testing_data_import/import_dummy_data.js 
+```
 API format follows JSON:API (https://jsonapi.org/)
 ### Create a profile
 ```
@@ -66,3 +68,39 @@ curl --location --request GET 'http://localhost:8080/test/v1.0/org/84298aa5-27a9
 * `docker-compose down --rmi all` -- Shutdown and clean up
 * Go to `http://localhost:9080/swagger/` to interact with APIs
 
+## Manual Testing Steps
+
+###### Step 1: Pagination
+GET request to your endpoint with limit=2 and offset=1.
+```
+curl "http://localhost:3000/api/search?limit=2&offset=1"
+```
+Expected: You get 2 results, not the whole dataset.
+
+###### Step 2: Search by patient name
+Send a GET request with patientname=Bruce Lee.
+```
+curl "http://localhost:3000/api/search?patientname=Bruce%20Lee"
+```
+Expected: Only results for Bruce Lee are returned.
+###### Step 3: Extra fields for special organisation
+As an org named "Circle", send a request and check that the response includes type and patientId attributes.
+As another org, send the same request and check that those fields are not included.
+
+###### Step 4: Search by patient ID
+Send a GET request with patientid=de8f4e03-bfca-483f-b356-e952ba8136f5.
+```
+curl "http://localhost:3000/api/search?patientid=de8f4e03-bfca-483f-b356-e952ba8136f5"
+```
+Expected: Only results for that patient ID.
+
+
+#### Testing only
+1. if you wanted to load data can load dummy data like this
+2. ``` node  ```
+#### All automation test is here..
+```
+test/search.test.ts
+start DB or use local DB
+nom run test
+```

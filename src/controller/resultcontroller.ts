@@ -29,7 +29,7 @@ export const resultController = new class {
                 const result = await search(
                     manager,
                     organisation,
-                    request.params,
+                    request.query,
                 );
                 response.status(200).json(result);
             }
